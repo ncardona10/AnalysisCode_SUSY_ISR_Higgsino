@@ -1,5 +1,5 @@
-# AnalysisCode
-Root data analyzer to perform phenomenological analysis.  
+# AnalysisCode - (Initial State Radiation) ISR Project
+Root data analyzer to perform phenomenological analysis to study the ISR topology.  
 
 Project Organization
 --------
@@ -75,4 +75,4 @@ Project Organization
     
     
 --------
-# AnalysisCode_SUSY_ISR_Higgsino
+
