@@ -45,15 +45,15 @@ int main(int argc, char *argv[])
   TFile *HistoOutputFile = new TFile(argv[2], "RECREATE");
 
   // directory to store the histograms
-  TDirectory *nLeptonsDirectory = HistoOutputFile->mkdir("noFilter");
+  TDirectory *noFilterDirectory = HistoOutputFile->mkdir("noFilter");
 
-  TDirectory *JetsDirectory = HistoOutputFile->mkdir("JetISR");
-  TDirectory *METDirectory = HistoOutputFile->mkdir("MET");
+  TDirectory *JetISRDirectory = HistoOutputFile->mkdir("JetISR");
   TDirectory *BJetsDirectory = HistoOutputFile->mkdir("BJets");
+  TDirectory *METDirectory = HistoOutputFile->mkdir("MET");
 
-  TDirectory *single_e_met_bjets_vbf = HistoOutputFile->mkdir("single_e");
-  TDirectory *single_mu_met_bjets_vbf = HistoOutputFile->mkdir("single_mu");
-  TDirectory *single_mu_met_bjets_vbf = HistoOutputFile->mkdir("single_tau");
+  TDirectory *single_eDirectory = HistoOutputFile->mkdir("single_e");
+  TDirectory *single_muDirectory = HistoOutputFile->mkdir("single_mu");
+  TDirectory *single_tauDirectory = HistoOutputFile->mkdir("single_tau");
 
   cout << "processing.." << endl;
 
@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
   // vector of pairs for jet pair that max mjj
   vector<pair<Jet *, Jet *>> maxMjjJetPairs;
 
-  cout<<"creating pairs"<<endl;
+  cout << "creating pairs" << endl;
 
   for (int i = 0; (unsigned)i < treeReader->GetEntries(); i++)
   {
@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
     maxMjjJetPairs.push_back(getMaxMjjJetPair(treeReader, branchDict, i));
   }
 
-  cout<< "done creating pairs"<<endl;
+  cout << "done creating pairs" << endl;
 
   int nEvents;
 
@@ -111,22 +111,32 @@ int main(int argc, char *argv[])
 
   // ---------------------------------No cuts--------------------------------------------
 
-  nLeptonsDirectory->cd();
+  noFilterDirectory->cd();
   cout << "No cuts" << endl;
   //drawLeptonCount(treeReader, ns, branchDict, cutsArr,noFilter);
-  nEvents = ptEtaPhiMjjMt(treeReader, branchDict, cutsArr,maxMjjJetPairs, noFilter);
+  nEvents = ptEtaPhiMjjMt(treeReader, branchDict, cutsArr, maxMjjJetPairs, noFilter);
   cout << "No cuts done." << endl;
 
   writeCsv(nEvents, string(argv[1]), "nLeptons");
 
   // ---------------------------------Jets--------------------------------------------
 
-  JetsDirectory->cd();
-  cout << "Jets" << endl;
-  nEvents = ptEtaPhiMjjMt(treeReader, branchDict, cutsArr, maxMjjJetPairs, jetConditions);
-  cout << "Jets done." << endl;
+  JetISRDirectory->cd();
+  cout << "JetISR" << endl;
+  nEvents = ptEtaPhiMjjMt(treeReader, branchDict, cutsArr, maxMjjJetPairs, jetISR);
+  cout << "Jet ISR done." << endl;
 
-  writeCsv(nEvents, string(argv[1]), "Jets");
+  writeCsv(nEvents, string(argv[1]), "JetISR");
+
+  // ---------------------------------MET--------------------------------------------
+
+  METDirectory->cd();
+  cout << "MET" << endl;
+  //drawLeptonCount(treeReader, ns, branchDict, cutsArr, met);
+  nEvents = ptEtaPhiMjjMt(treeReader, branchDict, cutsArr, maxMjjJetPairs, met);
+  cout << "MET done." << endl;
+
+  writeCsv(nEvents, string(argv[1]), "MET");
 
   // ---------------------------------BJets--------------------------------------------
 
@@ -138,44 +148,44 @@ int main(int argc, char *argv[])
 
   writeCsv(nEvents, string(argv[1]), "BJets");
 
-    // ---------------------------------MET--------------------------------------------
-
-  METDirectory->cd();
-  cout << "MET" << endl;
-  //drawLeptonCount(treeReader, ns, branchDict, cutsArr, met);
-  nEvents = ptEtaPhiMjjMt(treeReader, branchDict, cutsArr, maxMjjJetPairs, met);
-  cout << "MET done." << endl;
-
-  writeCsv(nEvents, string(argv[1]), "MET");
-
   // ------------------------------------VBF----------------------------------------
-  VBFDirectory->cd();
-  cout << "VBF" << endl;
-  //drawLeptonCount(treeReader, ns, branchDict, cutsArr, vbfCut);
-  nEvents = ptEtaPhiMjjMt(treeReader, branchDict, cutsArr,maxMjjJetPairs,  vbfCut);
-  cout << "VBF done." << endl;
+  // VBFDirectory->cd();
+  // cout << "VBF" << endl;
+  // //drawLeptonCount(treeReader, ns, branchDict, cutsArr, vbfCut);
+  // nEvents = ptEtaPhiMjjMt(treeReader, branchDict, cutsArr,maxMjjJetPairs,  vbfCut);
+  // cout << "VBF done." << endl;
 
-  writeCsv(nEvents, string(argv[1]), "VBF");
+  // writeCsv(nEvents, string(argv[1]), "VBF");
 
   // ---------------------------------SINGLE E--------------------------------------------
 
-  single_e_met_bjets_vbf->cd();
-  cout << "single_e_met_bjets_vbf" << endl;
+  single_eDirectory->cd();
+  cout << "single_e" << endl;
   //drawLeptonCount(treeReader, ns, branchDict, cutsArr, mono_e);
   nEvents = ptEtaPhiMjjMt(treeReader, branchDict, cutsArr, maxMjjJetPairs, mono_e);
-  cout << "single_e_met_bjets_vbf done." << endl;
+  cout << "single_e done." << endl;
 
-  writeCsv(nEvents, string(argv[1]), "single_e_met_bjets_vbf");
+  writeCsv(nEvents, string(argv[1]), "single_e");
 
   // ---------------------------------SINGLE MU--------------------------------------------
 
-  single_mu_met_bjets_vbf->cd();
-  cout << "single_mu_met_bjets_vbf" << endl;
+  single_muDirectory->cd();
+  cout << "single_mu" << endl;
   //drawLeptonCount(treeReader, ns, branchDict, cutsArr,mono_mu);
   nEvents = ptEtaPhiMjjMt(treeReader, branchDict, cutsArr, maxMjjJetPairs, mono_mu);
-  cout << "single_mu_met_bjets_vbf done." << endl;
+  cout << "single_mu done." << endl;
 
-  writeCsv(nEvents, string(argv[1]), "single_mu_met_bjets_vbf");
+  writeCsv(nEvents, string(argv[1]), "single_mu");
+
+  // ---------------------------------SINGLE TAU--------------------------------------------
+
+  single_tauDirectory->cd();
+  cout << "single_tau" << endl;
+  //drawLeptonCount(treeReader, ns, branchDict, cutsArr,mono_mu);
+  nEvents = ptEtaPhiMjjMt(treeReader, branchDict, cutsArr, maxMjjJetPairs, mono_tau);
+  cout << "single_tau done." << endl;
+
+  writeCsv(nEvents, string(argv[1]), "single_tau");
 
   // ---------------------------------DI LEPTON---------------------------------------------
 

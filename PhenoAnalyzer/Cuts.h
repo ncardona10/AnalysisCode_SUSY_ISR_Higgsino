@@ -393,11 +393,11 @@ bool jetISR(ExRootTreeReader *treeReader,
             vector<pair<Jet *, Jet *>> &jetPairs)
 {
   treeReader->ReadEntry(entry);
-  ans = false;
-  if (cutsArray[entry])
+  bool ans = false;
+  if (cutsArr[entry])
   {
     int cont = 0;
-    while (cont < getEntriesJets && !ans && cont < branchDict["Jet"]->GetEntries())
+    while (!ans && cont < branchDict["Jet"]->GetEntries())
     {
       Jet *jet = (Jet *)branchDict["Jet"]->At(cont);
       if (jet->PT >= 100.0 && abs(jet->Eta) < 2.5)
@@ -407,7 +407,7 @@ bool jetISR(ExRootTreeReader *treeReader,
       cont++;
     }
   }
-  cutsArray[entry] = ans;
+  cutsArr[entry] = ans;
   return ans;
 }
 
