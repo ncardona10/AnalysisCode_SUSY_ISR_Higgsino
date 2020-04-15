@@ -6,7 +6,7 @@ PHENOANALYZERFOLDER="/home/n.cardonac/AnalysisCode_SUSY_ISR_Higgsino/PhenoAnalyz
 PHENOANALYZEREXE="PhenoAnalyzer"
 INROOTFILE="Events/run_01/m_delphes_events.root"
 TEMPORALFOLDER="/home/n.cardonac/AnalysisCode_SUSY_ISR_Higgsino/RunCode/outPuts/temporal"
-OUTPUTFOLDER="/home/n.cardonac/AnalysisCode_SUSY_ISR_Higgsino/RunCode/outPuts/higgsino_complete"
+OUTPUTFOLDER="/home/n.cardonac/AnalysisCode_SUSY_ISR_Higgsino/RunCode/outPuts/out_put1"
 #--------------------------------------------------------------
 # Processes
 #---------------------------------------------------------------
