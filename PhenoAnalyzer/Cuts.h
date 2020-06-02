@@ -32,13 +32,13 @@ bool met(ExRootTreeReader *treeReader,
          vector<int> &cutsArr,
          vector<pair<Jet *, Jet *>> &jetPairs)
 {
-  // met>230
+  // met>200
 
   if (cutsArr[entry])
   {
     treeReader->ReadEntry(entry);
 
-    bool metBool = met(treeReader, branchDict, entry) > 230;
+    bool metBool = met(treeReader, branchDict, entry) > 200;
 
     cutsArr[entry] = metBool;
     return metBool;

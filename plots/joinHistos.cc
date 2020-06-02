@@ -7,15 +7,20 @@ using namespace std;
 int main(int argc, char const *argv[])
 {
   cout<<"creating output file"<<endl;
-  TFile *HistoOutputFile = new TFile("/home/n.cardonac/AnalysisCode_SUSY_VBF_Higgsino/plots/results/finalHistos.root", "RECREATE");
+  TFile *HistoOutputFile = new TFile("/home/n.cardonac/AnalysisCode_SUSY_ISR_Higgsino/plots/results/isr_histos.root", "RECREATE");
 
 
-  TString inputFolder = "/home/n.cardonac/RunCode/outPuts/try2/";
+  TString inputFolder = "/home/n.cardonac/AnalysisCode_SUSY_ISR_Higgsino/RunCode/outPuts/4signals/";
 
   vector<TString> folderNames = {"m_n2_100_c1_75_n1_50",
                                  "m_n2_400_c1_385_n1_370",
-                                 "vv",
-                                 "v+jets",
+				//  "m_n2_200_c1_175_n1_150",
+				//  "m_n2_100_c1_80_n1_60",
+                                 "ww",
+                                 "w+jets",
+				 "z+jets",
+				 "wz",
+				 "zz",
                                  "ttbar",
                                  };
 
@@ -29,13 +34,13 @@ int main(int argc, char const *argv[])
     cout<<"reading file: "<< inputFolder + folderNames[i] + "/" + folderNames[i] + "_nocut-1.root" <<endl;
   }
 
-  vector<TString> dirNames = {"nLeptons",
-			                        "Jets",	
+  vector<TString> dirNames = {"noFilter",
+			                        "JetISR",	
                               "BJets",
                               "MET",                              
-                              "VBF",
-                              "single_e_met_bjets_vbf",
-                              "single_mu_met_bjets_vbf"};
+                              "single_e",
+                              "single_mu",
+                              "single_tau"};
 
   //create ouput folders in output root
   cout<<"creating output subdirectories"<<endl;
@@ -49,6 +54,7 @@ int main(int argc, char const *argv[])
 
   //histogram names
   vector<TString> histoNames = {"etajet",
+                                "ptjet",
                                 "Mjj",
                                 "MET",
                                 "DEta"

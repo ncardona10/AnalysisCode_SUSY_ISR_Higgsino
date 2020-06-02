@@ -6,7 +6,7 @@ PHENOANALYZERFOLDER="/home/n.cardonac/AnalysisCode_SUSY_ISR_Higgsino/PhenoAnalyz
 PHENOANALYZEREXE="PhenoAnalyzer"
 INROOTFILE="Events/run_01/m_delphes_events.root"
 TEMPORALFOLDER="/home/n.cardonac/AnalysisCode_SUSY_ISR_Higgsino/RunCode/outPuts/temporal"
-OUTPUTFOLDER="/home/n.cardonac/AnalysisCode_SUSY_ISR_Higgsino/RunCode/outPuts/out_put1"
+OUTPUTFOLDER="/home/n.cardonac/AnalysisCode_SUSY_ISR_Higgsino/RunCode/outPuts/test2signals"
 #--------------------------------------------------------------
 # Processes
 #---------------------------------------------------------------
@@ -50,12 +50,12 @@ PROCESSSSUBFOLDER[8]="m_n2_100_c1_75_n1_50"
 RUNS[9]=2
 TIMES[9]=1
 
-PROCESSFOLDER[9]="/disco3/SIMULACIONES/SUSY/VBF/Higgsino/m_n2_100_c1_80_n1_60"
+PROCESSFOLDER[9]="/disco3/SIMULACIONES/SUSY/ISR/Higgsino/m_n2_100_c1_80_n1_60"
 PROCESSSSUBFOLDER[9]="m_n2_100_c1_80_n1_60"
 RUNS[10]=2
 TIMES[10]=1
 
-PROCESSFOLDER[10]="/disco3/SIMULACIONES/SUSY/VBF/Higgsino/m_n2_200_c1_175_n1_150"
+PROCESSFOLDER[10]="/disco3/SIMULACIONES/SUSY/ISR/Higgsino/m_n2_200_c1_175_n1_150"
 PROCESSSSUBFOLDER[10]="m_n2_200_c1_175_n1_150"
 RUNS[7]=2
 TIMES[7]=1
@@ -67,7 +67,7 @@ TIMES[7]=1
 # index process to run
 #-----------------------
 INDEX[1]=1
-INDEX[2]=8
+INDEX[2]=10
 #----------------------
 
 # Cut value
